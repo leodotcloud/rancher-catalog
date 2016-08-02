@@ -1,0 +1,6 @@
+.catalog:
+  name: Calico CNI plugin
+  version: v1
+  description: |
+    This catalog provides the Calico CNI plugin for use with Kubernetes on Rancher
+  minimum_rancher_version: v1.1.0

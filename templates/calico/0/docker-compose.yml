@@ -1,0 +1,27 @@
+calico-node:
+    labels:
+        io.rancher.container.dns: "true"
+        io.rancher.scheduler.global: "true"
+        io.rancher.sidekicks: calico-glue
+    image: calico/node:v0.20.0
+    command: /opt/rancher/bin/new_entry.sh
+    net: host
+    privileged: true
+    environment:
+        - RANCHER_DEBUG=1
+        - FELIX_ETCDADDR=etcd.kubernetes.rancher.internal:2379
+        - FELIX_ETCDSCHEME=http
+    volumes:
+        - /var/run/calico:/var/run/calico:rw
+        - /var/log/calico:/var/log/calico:rw
+    volumes_from:
+        - rancher-k8s-cni-adapter
+
+calico-glue:
+    image: leodotcloud/calico-glue
+    net: none
+    labels:
+        io.rancher.container.start_once: "true"
+        io.rancher.container.pull_image: "always"
+    volumes_from:
+        - rancher-k8s-cni-adapter

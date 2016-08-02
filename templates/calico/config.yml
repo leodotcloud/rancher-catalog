@@ -1,0 +1,5 @@
+name: Calico
+description: |
+  Calico service
+version: v1
+category: System
