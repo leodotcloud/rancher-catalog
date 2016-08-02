@@ -165,7 +165,7 @@ rancher-ingress-controller:
         - kubernetes:master
 
 rancher-k8s-cni-adapter:
-    image: leodotcloud/rancher-k8s-cni-adapter
+    image: leodotcloud/rancher-k8s-cni-adapter:dev
     net: none
     labels:
         io.rancher.container.start_once: "true"
