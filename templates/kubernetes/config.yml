@@ -1,5 +1,5 @@
 name: Kubernetes
 description: |
   Kubernetes service
-version: mtu
+version: cni_integration
 category: System
