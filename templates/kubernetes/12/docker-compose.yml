@@ -196,9 +196,15 @@ calico-node:
 
 calico-wrapper:
     image: leodotcloud/calico-wrapper:dev
-    net: none
     labels:
         io.rancher.container.pull_image: "always"
+    environment:
+        - FELIX_ETCDADDR=etcd.kubernetes.rancher.internal:2379
+        - FELIX_ETCDSCHEME=http
     volumes:
         - /var/run/cni:/opt/rancher/cni:rw
         - /var/run/docker.sock:/var/run/docker.sock
+        - /var/run/calico:/var/run/calico:rw
+        - /var/log/calico:/var/log/calico:rw
+    links:
+        - etcd
