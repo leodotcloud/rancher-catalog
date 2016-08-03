@@ -3,8 +3,8 @@ kubelet:
         io.rancher.container.dns: "true"
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
-        io.rancher.sidekicks: rancher-k8s-cni-adapter
         io.rancher.scheduler.global: "true"
+        io.rancher.sidekicks: rancher-k8s-cni-adapter
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
@@ -168,15 +168,18 @@ rancher-k8s-cni-adapter:
     image: leodotcloud/rancher-k8s-cni-adapter:dev
     net: none
     labels:
+        io.rancher.scheduler.global: "true"
         io.rancher.container.start_once: "true"
         io.rancher.container.pull_image: "always"
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
+        - /var/run/cni:/etc/net.d/cni:rw
 
 calico-node:
     labels:
         io.rancher.container.dns: "true"
         io.rancher.scheduler.global: "true"
+        io.rancher.sidekicks: calico-wrapper
     image: calico/node:v0.20.0
     command: /opt/rancher/bin/new_entry.sh
     net: host
@@ -192,11 +195,10 @@ calico-node:
         - calico-wrapper
 
 calico-wrapper:
-    container_name: calico-wrapper
     image: leodotcloud/calico-wrapper:dev
     net: none
     labels:
         io.rancher.container.start_once: "true"
         io.rancher.container.pull_image: "always"
-    volumes_from:
-        - rancher-k8s-cni-adapter
+    volumes:
+        - /var/run/cni:/etc/net.d/cni:rw
