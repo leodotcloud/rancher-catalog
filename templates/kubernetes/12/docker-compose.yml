@@ -173,7 +173,7 @@ rancher-k8s-cni-adapter:
         io.rancher.container.pull_image: "always"
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-        - /var/run/cni:/etc/net.d/cni:rw
+        - /var/run/cni:/opt/rancher/cni:rw
 
 calico-node:
     labels:
@@ -200,4 +200,4 @@ calico-wrapper:
     labels:
         io.rancher.container.pull_image: "always"
     volumes:
-        - /var/run/cni:/etc/net.d/cni:rw
+        - /var/run/cni:/opt/rancher/cni:rw
