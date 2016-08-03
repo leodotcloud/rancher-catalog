@@ -201,3 +201,4 @@ calico-wrapper:
         io.rancher.container.pull_image: "always"
     volumes:
         - /var/run/cni:/opt/rancher/cni:rw
+        - /var/run/docker.sock:/var/run/docker.sock
