@@ -198,7 +198,6 @@ calico-wrapper:
     image: leodotcloud/calico-wrapper:dev
     net: none
     labels:
-        io.rancher.container.start_once: "true"
         io.rancher.container.pull_image: "always"
     volumes:
         - /var/run/cni:/etc/net.d/cni:rw
