@@ -200,6 +200,7 @@ calico-wrapper:
         io.rancher.container.dns: "true"
         io.rancher.container.pull_image: "always"
     net: host
+    pid: host
     privileged: true
     environment:
         - FELIX_ETCDADDR=etcd.kubernetes.rancher.internal:2379
