@@ -18,7 +18,7 @@ kubelet:
         - --v=4
         - --network-plugin=cni
         - --network-plugin-dir=/etc/cni/net.d
-    image: rancher/k8s:v1.3.0-rancher3
+    image: leodotcloud/k8s:bridge-logging
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
         - /var/run/docker.pid:/var/run/docker.pid
