@@ -15,11 +15,13 @@ kubelet:
         - --healthz-bind-address=0.0.0.0
         - --cluster-dns=169.254.169.250
         - --cluster-domain=cluster.local
+        - --v=4
         - --network-plugin=cni
         - --network-plugin-dir=/etc/cni/net.d
     image: rancher/k8s:v1.3.0-rancher3
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
+        - /var/run/docker.pid:/var/run/docker.pid
         - /var/run:/host/var/run
         - /var/lib/docker:/var/lib/docker
         - /dev:/host/dev
