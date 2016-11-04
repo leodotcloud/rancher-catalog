@@ -1,5 +1,5 @@
 name: Plug-in Manager
-version: v0.0.1
+version: 0.0.1
 category: Framework
 labels:
   io.rancher.certified: rancher
