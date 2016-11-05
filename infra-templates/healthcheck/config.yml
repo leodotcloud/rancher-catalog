@@ -1,7 +1,6 @@
-name: Healthcheck service
-description: |
-  Rancher healthcheck service
+name: Healthcheck Service
+description: Rancher healthcheck service
 version: v0.1.0
-category: Rancher Services
+category: Framework
 labels:
   io.rancher.certified: rancher

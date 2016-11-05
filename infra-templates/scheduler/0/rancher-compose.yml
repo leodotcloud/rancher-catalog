@@ -1,5 +1,5 @@
 .catalog:
-    name: Rancher Scheduler
+    name: Scheduler
     description: A resource based scheduler plugin for Rancher.
     version: v0.1.0-dev
     minimum_rancher_version: v1.1.999
