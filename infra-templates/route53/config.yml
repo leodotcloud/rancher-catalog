@@ -2,4 +2,4 @@ name: Route53 DNS
 description: |
   Rancher External DNS service powered by Amazon Route53
 version: v0.6.0-rancher1
-category: Rancher Services
+category: External DNS
