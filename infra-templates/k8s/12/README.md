@@ -1,7 +1,6 @@
-## Upgrade Kuberenetes Stack:  WARNING
-When upgrading to this version of Kubernetes, rolling back to the previous version is not supported.
+## Kubernetes 1.4
 
-## Backup Configuration
+### Backup Configuration
 
 Backups are enabled/disabled via the `Enable Backups` radio buttons.
 
@@ -15,6 +14,10 @@ The maximum number of backups stored on disk at any given moment follows the equ
 
 If backups are disabled, the values for `Backup Creation Period` and `Backup Retention Period` are ignored.
 
-## Further Reading
+### Further Reading
 
 See [the wiki](https://github.com/rancher/rancher/wiki/Kubernetes-Management#deployment-types) for further information regarding usage of this template.
+
+## Upgrading to this Version: WARNING
+
+If you are upgrading from a previous version, rollback is not supported.
