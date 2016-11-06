@@ -1,7 +1,7 @@
 version: '2'
 services:
   dns:
-    image: rancher/dns:v0.10.0
+    image: rancher/dns:v0.10.1
     network_mode: bridge
     volumes:
     - /var/tmp
