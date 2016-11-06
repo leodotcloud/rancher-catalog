@@ -18,6 +18,6 @@ If backups are disabled, the values for `Backup Creation Period` and `Backup Ret
 
 See [the wiki](https://github.com/rancher/rancher/wiki/Kubernetes-Management#deployment-types) for further information regarding usage of this template.
 
-## Upgrading to this Version: WARNING
+### Upgrading to this Version: WARNING
 
 If you are upgrading from a previous version, rollback is not supported.
