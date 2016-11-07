@@ -2,7 +2,7 @@ version: '2'
 services:
   calico:
     cap_add:
-    - NET_ADMIN
+      - NET_ADMIN
     image: calico/node:v0.23.0      # Use this version in catalog's config.yml
     network_mode: host
     labels:
@@ -11,11 +11,11 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.calico: 'true'
     volumes:
-        - /var/run/calico:/var/run/calico:rw
-        - /var/log/calico:/var/log/calico:rw
+      - /var/run/calico:/var/run/calico:rw
+      - /var/log/calico:/var/log/calico:rw
     environment:
-        - FELIX_ETCDADDR=etcd:2379
-        - FELIX_ETCDSCHEME=http
+      - FELIX_ETCDADDR=etcd:2379
+      - FELIX_ETCDSCHEME=http
   cni-driver:
     privileged: true
     image: calico/cni:v1.4.3
@@ -25,29 +25,27 @@ services:
     labels:
       io.rancher.network.cni.binary: 'calico'
       io.rancher.container.dns: 'true'
-
-    etcd:
-        image: rancher/etcd:v2.3.7-11
-        labels:
-            io.rancher.scheduler.affinity:host_label_soft: etcd=true
-            io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-            io.rancher.sidekicks: data
-        environment:
-            RANCHER_DEBUG: 'true'
-            EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
-            BACKUP_PERIOD: '${BACKUP_PERIOD}'
-            BACKUP_RETENTION: '${BACKUP_RETENTION}'
-        volumes:
-        - etcd:/pdata
-        - /var/etcd/backups:/data-backup
-        volumes_from:
-        - data
-
-    data:
-        image: busybox
-        entrypoint: /bin/true
-        net: none
-        volumes:
-        - /data
-        labels:
-            io.rancher.container.start_once: 'true'
+  etcd:
+    image: rancher/etcd:v2.3.7-11
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft: etcd=true
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.sidekicks: data
+    environment:
+      RANCHER_DEBUG: 'true'
+      EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
+      BACKUP_PERIOD: '${BACKUP_PERIOD}'
+      BACKUP_RETENTION: '${BACKUP_RETENTION}'
+    volumes:
+      - etcd:/pdata
+      - /var/etcd/backups:/data-backup
+    volumes_from:
+      - data
+  data:
+    image: busybox
+    entrypoint: /bin/true
+    net: none
+    volumes:
+      - /data
+    labels:
+      io.rancher.container.start_once: 'true'
