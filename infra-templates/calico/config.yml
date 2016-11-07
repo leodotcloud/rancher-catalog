@@ -1,0 +1,5 @@
+name: Calico
+version: v0.23.0        # Keep this in sync with calico/node tag version
+category: Networking
+labels:
+  io.rancher.certified: rancher

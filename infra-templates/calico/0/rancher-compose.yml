@@ -1,0 +1,21 @@
+.catalog:
+  name: "Calico"
+  version: "v0.23.0"
+
+ipsec:
+  network_driver:
+    name: Calico
+    default_network:
+      name: calico
+      dns:
+      - 169.254.169.250
+      dns_search:
+      - rancher.internal
+    cni_config:
+      '10-rancher-calico.conf':
+        name: rancher-calico-network
+        type: calico
+        etcd_authority: etcd:2379
+        log_level: info
+        ipam:
+          type: calico-ipam
