@@ -1,0 +1,25 @@
+version: '2'
+services:
+  vxlan:
+    cap_add:
+    - NET_ADMIN
+    image: rancher/net:v0.6.2
+    command: start-vxlan.sh
+    network_mode: vxlan
+    ports:
+    - 4789:4789/udp
+    labels:
+      io.rancher.sidekicks: cni-driver
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.vxlan: 'true'
+  cni-driver:
+    privileged: true
+    image: rancher/net:v0.6.2
+    command: sh -c "touch /var/log/rancher-ipam.log && exec tail ---disable-inotify -F /var/log/rancher-ipam.log"
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.network.cni.binary: 'rancher-bridge'
+      io.rancher.container.dns: 'true'
+
