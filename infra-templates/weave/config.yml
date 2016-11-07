@@ -1,0 +1,9 @@
+name: Weave
+description: |
+  Networking plugin from Weaveworks.
+version: v0.0.1
+category: Networking
+projectURL: https://www.weave.works
+license: Apache License, Version 2.0
+labels:
+  io.rancher.certified: rancher
