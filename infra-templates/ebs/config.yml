@@ -5,3 +5,4 @@ version: 0.1.1
 category: Storage
 labels:
   io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm'
