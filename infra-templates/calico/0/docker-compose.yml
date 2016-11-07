@@ -8,6 +8,7 @@ services:
     labels:
       io.rancher.sidekicks: cni-driver
       io.rancher.scheduler.global: 'true'
+      io.rancher.container.dns: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.calico: 'true'
     volumes:
@@ -27,7 +28,9 @@ services:
       io.rancher.container.dns: 'true'
   etcd:
     image: rancher/etcd:v2.3.7-11
+    network_mode: bridge
     labels:
+      io.rancher.container.network: true
       io.rancher.scheduler.affinity:host_label_soft: etcd=true
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.sidekicks: data
