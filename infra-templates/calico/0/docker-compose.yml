@@ -44,7 +44,7 @@ services:
   data:
     image: busybox
     entrypoint: /bin/true
-    net: none
+    network_mode: none
     volumes:
       - /data
     labels:
