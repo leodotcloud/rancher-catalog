@@ -1,7 +1,7 @@
 version: '2'
 services:
   dns:
-    image: rancher/dns:v0.10.1
+    image: rancher/dns:v0.10.2
     network_mode: bridge
     volumes:
     - /var/tmp
@@ -13,7 +13,7 @@ services:
   dns-router:
     cap_add:
     - NET_ADMIN
-    image: rancher/dns:v0.10.0
+    image: rancher/dns:v0.10.2
     network_mode: host
     volumes_from:
     - dns

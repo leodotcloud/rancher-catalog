@@ -1,5 +1,5 @@
-plugin-manager:
-  image: rancher/plugin-manager:v0.1.1
+network-manager:
+  image: rancher/plugin-manager:v0.1.3
   privileged: true
   net: host
   pid: host
