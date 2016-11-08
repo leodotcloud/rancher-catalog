@@ -1,3 +1,27 @@
 .catalog:
   name: "Calico"
   version: "v0.23.0"
+  questions:
+    - variable: "rancher_debug"
+      label: "Enable Rancher debug"
+      default : false
+      description: |
+        Enable Rancher debug messages in the logs
+      type: boolean
+
+calico:
+  network_driver:
+    name: Calico
+    default_network:
+      name: calico
+      dns:
+      - 169.254.169.250
+      dns_search:
+      - rancher.internal
+    cni_config:
+      '10-rancher-calico.conf':
+        name: rancher-calico-network
+        type: calico
+        log_level: info
+        ipam:
+          type: calico-ipam

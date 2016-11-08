@@ -1,1 +1,50 @@
 version: '2'
+services:
+  calico:
+    cap_add:
+      - NET_ADMIN
+    image: calico/node:v0.23.0
+    network_mode: host
+    depends_on:
+      - calico-etcd
+    labels:
+      io.rancher.sidekicks: cni-driver, calico-magic
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.dns: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.calico: 'true'
+    volumes:
+      - /var/run/calico:/var/run/calico:rw
+      - /var/log/calico:/var/log/calico:rw
+    volumes_from:
+      - calico-magic
+    environment:
+      - RANCHER_DEBUG=${rancher_debug}
+    command: /opt/rancher/bin/new_calico_entry.sh
+  cni-driver:
+    privileged: true
+    image: calico/cni:v1.4.3
+    command: sh
+    tty: true
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.network.cni.binary: 'calico'
+      io.rancher.container.dns: 'true'
+  calico-etcd:
+    image: quay.io/coreos/etcd:v3.0.14
+    network_mode: host
+    labels:
+      io.rancher.container.dns: 'true'
+    command:
+      - etcd
+      - -advertise-client-urls
+      - http://0.0.0.0:2379,http://0.0.0.0:4001
+      - -listen-client-urls
+      - http://0.0.0.0:2379,http://0.0.0.0:4001
+  calico-magic:
+    image: leodotcloud/calico-magic:dev
+    network_mode: none
+    labels:
+      io.rancher.container.start_once: "true"
+      io.rancher.container.pull_image: "always"
