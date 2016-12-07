@@ -1,0 +1,8 @@
+name: Rancher VXLAN - ADMIN
+description: |
+  Rancher Networking plugin using VXLAN overlay. ADMIN.
+version: v0.0.1
+category: Networking
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,mesos'
