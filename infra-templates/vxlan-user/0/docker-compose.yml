@@ -3,7 +3,7 @@ services:
   vxlan:
     cap_add:
     - NET_ADMIN
-    image: leodotcloud/net:hna
+    image: leodotcloud/net:hna_crash_fix
     network_mode: vxlan
     command: start-vxlan.sh
     ports:
@@ -25,7 +25,7 @@ services:
         max-file: '2'
   cni-driver:
     privileged: true
-    image: leodotcloud/net:hna
+    image: leodotcloud/net:hna_crash_fix
     command: sh -c "touch /var/log/rancher-ipam.log && exec tail ---disable-inotify -F /var/log/rancher-ipam.log"
     network_mode: host
     pid: host
