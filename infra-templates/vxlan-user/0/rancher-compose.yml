@@ -7,7 +7,7 @@ vxlan:
     name: Rancher VXLAN
     default_network:
       name: vxlan
-      host_ports: true
+      host_ports: false
       subnets:
       - network_address: '10.42.0.0/16'
       dns:
