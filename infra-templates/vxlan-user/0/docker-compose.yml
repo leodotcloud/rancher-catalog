@@ -14,6 +14,7 @@ services:
     labels:
       io.rancher.sidekicks: cni-driver
       io.rancher.scheduler.global: 'true'
+      io.rancher.network.host_ports: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.vxlan: 'true'
       io.rancher.container.agent_service.networking: 'true'
