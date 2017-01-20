@@ -7,11 +7,10 @@ services:
     network_mode: flat
     volumes_from:
       - cni-driver
-    labels:
-      io.rancher.sidekicks: cni-driver
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     labels:
+      io.rancher.sidekicks: cni-driver
       io.rancher.scheduler.global: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
       io.rancher.container.agent_service.flat: 'true'
