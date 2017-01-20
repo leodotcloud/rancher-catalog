@@ -1,0 +1,36 @@
+version: '2'
+services:
+  flat:
+    image: nginx
+    cap_add:
+      - NET_ADMIN
+    network_mode: flat
+    volumes_from:
+      - cni-driver
+    labels:
+      io.rancher.sidekicks: cni-driver
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.cni.link_mtu_overhead: '0'
+      io.rancher.container.agent_service.flat: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
+  cni-driver:
+    privileged: true
+    image: leodotcloud/net:flat
+    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.network.cni.binary: 'rancher-bridge'
+      io.rancher.container.dns: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
