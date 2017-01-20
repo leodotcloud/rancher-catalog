@@ -44,7 +44,6 @@ flat:
         bridge: $DOCKER_BRIDGE
         bridgeSubnet: $SUBNET
         logToFile: /var/log/rancher-cni.log
-        isDefaultGateway: true
         hostNat: true
         hairpinMode: true
         mtu: ${MTU}
