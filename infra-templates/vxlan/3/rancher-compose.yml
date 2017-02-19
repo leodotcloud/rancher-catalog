@@ -25,7 +25,7 @@
       label: "Enable Host Ports"
       description: "Flag to enable/disable publishing the ports on the hosts"
       type: "boolean"
-      default: "true"
+      default: true
       required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
