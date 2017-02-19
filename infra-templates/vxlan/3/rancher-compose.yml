@@ -21,6 +21,12 @@
       type: "string"
       default: '10.42.0.0/16'
       required: true
+    - variable: "HOST_PORTS"
+      label: "Enable Host Ports"
+      description: "Flag to enable/disable publishing the ports on the hosts"
+      type: "boolean"
+      default: "true"
+      required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
       description: "This will enable very verbose debug logs."
@@ -33,7 +39,7 @@ vxlan:
     name: Rancher VXLAN
     default_network:
       name: vxlan
-      host_ports: true
+      host_ports: $HOST_PORTS
       subnets:
       - network_address: $SUBNET
       dns:
