@@ -1,11 +1,11 @@
 version: '2'
 services:
   network-manager:
-    image: rancher/network-manager:v0.4.8
+    image: leodotcloud/network-manager:dev
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager --metadata-url http://169.254.169.250/2016-07-29
+    command: plugin-manager --metadata-url http://169.254.169.250/2016-07-29 --debug
     environment:
       DOCKER_BRIDGE: docker0
       METADATA_IP: 169.254.169.250
