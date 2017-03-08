@@ -21,6 +21,18 @@
       type: "string"
       default: '10.42.0.0/16'
       required: true
+    - variable: "START_ADDRESS"
+      label: "Start Address of Subnet"
+      description: "The starting IP address for the address range"
+      type: "string"
+      default: '10.42.0.2'
+      required: true
+    - variable: "END_ADDRESS"
+      label: "End Address of Subnet"
+      description: "The ending IP address for the address range"
+      type: "string"
+      default: '10.42.255.250'
+      required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
       description: "This will enable very verbose debug logs."
@@ -36,6 +48,8 @@ vxlan:
       host_ports: true
       subnets:
       - network_address: $SUBNET
+        start_address: $START_ADDRESS
+        end_address: $END_ADDRESS
       dns:
       - 169.254.169.250
       dns_search:
