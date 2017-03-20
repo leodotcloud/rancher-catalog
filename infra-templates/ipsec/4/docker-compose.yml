@@ -15,6 +15,8 @@ services:
       io.rancher.sidekicks: router,cni-driver
       io.rancher.scheduler.global: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
+    sysctls:
+      net.ipv4.conf.all.send_redirects: 0
   router:
     cap_add:
       - NET_ADMIN

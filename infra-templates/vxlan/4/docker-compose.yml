@@ -26,6 +26,8 @@ services:
       options:
         max-size: 25m
         max-file: '2'
+    sysctls:
+      net.ipv4.conf.all.send_redirects: 0
   cni-driver:
     privileged: true
     image: rancher/net:v0.9.4
