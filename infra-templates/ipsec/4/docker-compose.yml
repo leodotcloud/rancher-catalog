@@ -18,7 +18,7 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.9.4
+    image: leodotcloud/net:ipsec_debugging
     network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
