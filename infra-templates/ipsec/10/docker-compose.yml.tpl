@@ -17,10 +17,12 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.11.4
+    image: leodotcloud/net:rekey
     network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      IPSEC_IKE_SA_REKEY_INTERVAL: '${IPSEC_IKE_SA_REKEY_INTERVAL}'
+      IPSEC_CHILD_SA_REKEY_INTERVAL: '${IPSEC_CHILD_SA_REKEY_INTERVAL}'
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.ipsec: 'true'
@@ -36,7 +38,7 @@ services:
       net.ipv4.xfrm4_gc_thresh: '2147483647'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.11.4
+    image: leodotcloud/net:rekey
     command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
     network_mode: host
     pid: host

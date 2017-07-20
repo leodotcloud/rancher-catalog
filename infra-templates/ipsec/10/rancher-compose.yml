@@ -51,3 +51,15 @@
       type: "boolean"
       default: "true"
       required: true
+    - variable: "IPSEC_IKE_SA_REKEY_INTERVAL"
+      label: "IPSec IKE_SA rekey interval"
+      description: "Time interval for IPSec strongswan configuration to rekey IKA_SAs"
+      type: "string"
+      default: '4h'
+      required: true
+    - variable: "IPSEC_CHILD_SA_REKEY_INTERVAL"
+      label: "IPSec CHILD_SA rekey time"
+      description: "Time interval for IPSec strongswan configuration to rekey CHILD_SAs"
+      type: "string"
+      default: '1h'
+      required: true
