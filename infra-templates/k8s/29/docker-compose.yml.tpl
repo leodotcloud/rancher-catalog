@@ -209,6 +209,15 @@ kubectl-shell:
         - kubectl-shell-entry.sh
     image: rancher/kubectld:v0.8.1
     privileged: true
+    health_check:
+        port: 10240
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
 
 scheduler:
     command:
