@@ -192,7 +192,7 @@ kubectld:
     environment:
         SERVER: http://kubernetes.kubernetes.rancher.internal
         LISTEN: ":8091"
-    image: rancher/kubectld:v0.8.1
+    image: rancher/kubectld:v0.8.2
     links:
         - kubernetes
 
@@ -207,8 +207,17 @@ kubectl-shell:
         io.rancher.k8s.token: "true"
     command:
         - kubectl-shell-entry.sh
-    image: rancher/kubectld:v0.8.1
+    image: rancher/kubectld:v0.8.2
     privileged: true
+    health_check:
+        port: 10240
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
 
 scheduler:
     command:
