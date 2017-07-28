@@ -172,7 +172,6 @@ kubernetes:
     image: rancher/k8s:v1.7.2-rancher5
     links:
         - etcd
-        - rancher-kubernetes-auth
 
 kube-hostname-updater:
     net: container:kubernetes
