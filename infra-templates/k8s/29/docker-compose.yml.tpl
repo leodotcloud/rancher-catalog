@@ -326,6 +326,7 @@ rancher-kubernetes-auth:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
         {{- end }}
+        io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/kubernetes
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
     health_check:
