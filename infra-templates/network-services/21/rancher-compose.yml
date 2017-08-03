@@ -11,8 +11,8 @@
       default: 2
       type: int
     - variable: TTL
-      label: Timeout for Internal Rancher DNS
-      description: Specify timeout in seconds for local requests.
+      label: TTL for service discovery answers
+      description: How long answers for *.rancher.internal responses are valid
       required: true
       default: 10
       type: int
