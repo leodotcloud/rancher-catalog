@@ -17,10 +17,11 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.11.6
+    image: leodotcloud/net:replay_window
     network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      IPSEC_REPLAY_WINDOW_SIZE: '${IPSEC_REPLAY_WINDOW_SIZE}'
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.ipsec: 'true'
@@ -36,7 +37,7 @@ services:
       net.ipv4.xfrm4_gc_thresh: '2147483647'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.11.6
+    image: leodotcloud/net:replay_window
     command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
     network_mode: host
     pid: host
