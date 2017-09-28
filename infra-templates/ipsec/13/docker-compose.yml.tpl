@@ -1,31 +1,17 @@
 version: '2'
 services:
   ipsec:
-    # IMPORTANT!!!! DO NOT CHANGE VERSION ON UPGRADE
-    image: rancher/net:holder
-    command: sh -c "echo Refer to router sidekick for logs; mkfifo f; exec cat f"
-    network_mode: ipsec
-    ports:
-      - 500:500/udp
-      - 4500:4500/udp
-    labels:
-      io.rancher.sidekicks: router
-      io.rancher.scheduler.global: 'true'
-      io.rancher.cni.link_mtu_overhead: '0'
-      io.rancher.network.macsync: 'true'
-      io.rancher.network.arpsync: 'true'
-  router:
-    cap_add:
-      - NET_ADMIN
-    image: rancher/net:v0.12.0
+    image: leodotcloud/net:host_net_ns
     command: start-ipsec.sh
-    network_mode: container:ipsec
+    privileged: true
+    network_mode: host
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
       IPSEC_REPLAY_WINDOW_SIZE: '${IPSEC_REPLAY_WINDOW_SIZE}'
       IPSEC_IKE_SA_REKEY_INTERVAL: '${IPSEC_IKE_SA_REKEY_INTERVAL}'
       IPSEC_CHILD_SA_REKEY_INTERVAL: '${IPSEC_CHILD_SA_REKEY_INTERVAL}'
     labels:
+      io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.ipsec: 'true'
     logging:
@@ -33,14 +19,9 @@ services:
       options:
         max-size: 25m
         max-file: '2'
-    sysctls:
-      net.ipv4.conf.all.send_redirects: '0'
-      net.ipv4.conf.default.send_redirects: '0'
-      net.ipv4.conf.eth0.send_redirects: '0'
-      net.ipv4.xfrm4_gc_thresh: '2147483647'
   cni-driver:
+    image: leodotcloud/net:host_net_ns
     privileged: true
-    image: rancher/net:v0.12.0
     command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
     network_mode: host
     pid: host
