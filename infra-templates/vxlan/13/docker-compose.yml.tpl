@@ -40,10 +40,12 @@ services:
       net.ipv4.conf.eth0.send_redirects: '0'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.11.9
-    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    image: rancher/net:v0.13.1
+    command: start-cni-driver.sh
     network_mode: host
     pid: host
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.network.cni.binary: 'rancher-bridge'
@@ -53,6 +55,9 @@ services:
       options:
         max-size: 25m
         max-file: '2'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - rancher-cni-driver:/opt/cni-driver
     network_driver:
       name: Rancher VXLAN
       default_network:
@@ -84,5 +89,3 @@ services:
             subnetPrefixSize: /{{ .Values.SUBNET_PREFIX }}
             logToFile: /var/log/rancher-cni.log
             isDebugLevel: ${RANCHER_DEBUG}
-            routes:
-              - dst: 169.254.169.250/32
