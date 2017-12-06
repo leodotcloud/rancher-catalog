@@ -19,7 +19,7 @@
       label: "Subnet"
       description: "The subnet to use for the managed IPSEC network."
       type: "string"
-      default: '10.42.0.0/16'
+      default: '10.49.0.0/16'
       required: true
     - variable: "SUBNET_PREFIX"
       label: "IPAM Subnet Prefix"
@@ -69,3 +69,9 @@
       type: "string"
       default: '1h'
       required: true
+    - variable: RANCHER_METADATA_ADDRESS
+      label: Metadata IP Address
+      description: Metadata IP Address for the environment
+      required: true
+      default: 169.254.169.249
+      type: string

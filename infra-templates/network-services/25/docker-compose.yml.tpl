@@ -1,7 +1,7 @@
 version: '2'
 
-{{- $netManagerImage:="rancher/network-manager:v0.7.18" }}
-{{- $metadataImage:="rancher/metadata:v0.9.5" }}
+{{- $netManagerImage:="leodotcloud/network-manager:v0.7.18_configurable_metadata_address" }}
+{{- $metadataImage:="leodotcloud/metadata:v0.9.5_configurable_metadata_address" }}
 {{- $dnsImage:="rancher/dns:v0.15.3" }}
 
 services:
@@ -10,10 +10,10 @@ services:
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager --disable-cni-setup --metadata-address 169.254.169.250
+    command: plugin-manager --disable-cni-setup --metadata-address ${RANCHER_METADATA_ADDRESS}
     environment:
       DOCKER_BRIDGE: docker0
-      METADATA_IP: 169.254.169.250
+      METADATA_IP: ${RANCHER_METADATA_ADDRESS}
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /var/lib/docker:/var/lib/docker
@@ -36,6 +36,8 @@ services:
     image: {{$metadataImage}}
     network_mode: bridge
     command: start.sh rancher-metadata -reload-interval-limit=${RELOAD_INTERVAL_LIMIT} -subscribe
+    environment:
+      RANCHER_METADATA_ADDRESS: ${RANCHER_METADATA_ADDRESS}
     labels:
       io.rancher.sidekicks: dns
       io.rancher.container.create_agent: 'true'
@@ -55,7 +57,7 @@ services:
   dns:
     image: {{$dnsImage}}
     network_mode: container:metadata
-    command: rancher-dns --listen 169.254.169.250:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
+    command: rancher-dns --listen ${RANCHER_METADATA_ADDRESS}:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:
       io.rancher.scheduler.global: 'true'
     logging:
