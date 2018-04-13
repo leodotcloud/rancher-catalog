@@ -34,3 +34,9 @@
       required: true
       default: 1000
       type: int
+    - variable: RANCHER_METADATA_ADDRESS
+      label: Metadata IP Address
+      description: Metadata IP Address for the environment
+      required: true
+      default: 169.254.169.250
+      type: string

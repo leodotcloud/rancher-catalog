@@ -4,6 +4,13 @@
   description: "Rancher healthcheck service"
   minimum_rancher_version: v1.6.13-rc1
   maximum_rancher_version: v1.6.14
+  questions:
+  - variable: RANCHER_METADATA_ADDRESS
+    label: Metadata IP Address
+    description: Metadata IP Address for the environment
+    required: true
+    default: 169.254.169.250
+    type: string
 healthcheck:
   health_check:
       port: 42
