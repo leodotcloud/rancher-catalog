@@ -26,6 +26,7 @@ services:
     image: rancher/net:v0.11.9
     network_mode: container:vxlan
     environment:
+      RANCHER_METADATA_ADDRESS: ${RANCHER_METADATA_ADDRESS}
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
       VXLAN_VTEP_MTU: '${MTU}'
     command: start-vxlan.sh
@@ -45,6 +46,7 @@ services:
     network_mode: host
     pid: host
     environment:
+      RANCHER_METADATA_ADDRESS: ${RANCHER_METADATA_ADDRESS}
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     labels:
       io.rancher.scheduler.global: 'true'
@@ -66,7 +68,7 @@ services:
         subnets:
         - network_address: $SUBNET
         dns:
-        - 169.254.169.250
+        - ${RANCHER_METADATA_ADDRESS}
         dns_search:
         - rancher.internal
       cni_config:

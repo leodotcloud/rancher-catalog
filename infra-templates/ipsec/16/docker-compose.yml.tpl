@@ -24,6 +24,7 @@ services:
     command: start-ipsec.sh
     network_mode: container:ipsec
     environment:
+      RANCHER_METADATA_ADDRESS: ${RANCHER_METADATA_ADDRESS}
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
       IPSEC_REPLAY_WINDOW_SIZE: '${IPSEC_REPLAY_WINDOW_SIZE}'
       IPSEC_IKE_SA_REKEY_INTERVAL: '${IPSEC_IKE_SA_REKEY_INTERVAL}'
@@ -56,6 +57,7 @@ services:
     network_mode: host
     pid: host
     environment:
+      RANCHER_METADATA_ADDRESS: ${RANCHER_METADATA_ADDRESS}
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     labels:
       io.rancher.scheduler.global: 'true'
@@ -79,7 +81,7 @@ services:
           start_address: $SUBNET_START_ADDRESS
           end_address: $SUBNET_END_ADDRESS
         dns:
-        - 169.254.169.250
+        - ${RANCHER_METADATA_ADDRESS}
         dns_search:
         - rancher.internal
       cni_config:
