@@ -28,6 +28,7 @@ services:
     network_mode: host
     pid: host
     environment:
+      RANCHER_METADATA_ADDRESS: '${RANCHER_METADATA_ADDRESS}'
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     volumes:
     - /var/lib/rancher/per_host_subnet:/var/lib/cni/networks
