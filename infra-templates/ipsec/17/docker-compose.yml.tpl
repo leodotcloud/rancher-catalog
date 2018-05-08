@@ -46,11 +46,11 @@ services:
     image: {{$netImage}}
     command:
       - connectivity-check
-      {{- if ne .Values.CONNECTIVITY_CHECK_INTERVAL 5000 }}
+      {{- if ne .Values.CONNECTIVITY_CHECK_INTERVAL "5000" }}
       - --connectivity-check-interval
       - ${CONNECTIVITY_CHECK_INTERVAL}
       {{- end }}
-      {{- if ne .Values.PEER_CONNECTION_TIMEOUT 1000 }}
+      {{- if ne .Values.PEER_CONNECTION_TIMEOUT "1000" }}
       - --peer-connection-timeout
       - ${PEER_CONNECTION_TIMEOUT}
       {{- end }}
