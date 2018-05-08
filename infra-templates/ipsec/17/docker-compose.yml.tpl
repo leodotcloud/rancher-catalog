@@ -1,6 +1,6 @@
 version: '2'
 
-{{- $netImage:="rancher/net:v0.13.11" }}
+{{- $netImage:="rancher/net:v0.13.13" }}
 
 services:
   ipsec:
@@ -46,6 +46,14 @@ services:
     image: {{$netImage}}
     command:
       - connectivity-check
+      {{- if ne .Values.CONNECTIVITY_CHECK_INTERVAL 5000 }}
+      - --connectivity-check-interval
+      - ${CONNECTIVITY_CHECK_INTERVAL}
+      {{- end }}
+      {{- if ne .Values.PEER_CONNECTION_TIMEOUT 1000 }}
+      - --peer-connection-timeout
+      - ${PEER_CONNECTION_TIMEOUT}
+      {{- end }}
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     network_mode: container:ipsec
