@@ -91,13 +91,13 @@
       label: "Interval between connectivity checks for a peer (in milliseconds)"
       description: "This is an advanced setting and most users will not need to use this. Incorrect values can break your Rancher installation."
       type: int
-      default: 5000
+      default: 10000
       required: true
     - variable: "PEER_CONNECTION_TIMEOUT"
       label: "Connection timeout when connecting to a peer (in milliseconds)"
       description: "This is an advanced setting and most users will not need to use this. Incorrect values can break your Rancher installation."
       type: int
-      default: 1000
+      default: 3000
       required: true
 
 ipsec:
