@@ -99,3 +99,9 @@
       type: int
       default: 3000
       required: true
+    - variable: "ENABLE_IPSEC_HEALTHCHECK"
+      label: "Enable Health Check for IPSec"
+      description: "This will enable healtch check for IPSec service."
+      type: "boolean"
+      default: "false"
+      required: true
